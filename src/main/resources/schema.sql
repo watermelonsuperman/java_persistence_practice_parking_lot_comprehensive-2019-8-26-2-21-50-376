@@ -5,8 +5,8 @@ CREATE TABLE employee (
    
 );
 create TABLE parkingLot(
-	parkingLotId integer primary key,
+	parkingLotId INTEGER PRIMARY KEY,
 	capacity integer not null,
 	availablePositionCount integer not null,
-	id integer foreign key
+	id INTEGER
 );
