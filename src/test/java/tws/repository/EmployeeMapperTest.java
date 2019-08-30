@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
 import tws.entity.Employee;
+import tws.service.EmployeeService;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -21,6 +22,7 @@ public class EmployeeMapperTest {
 
     @Autowired
     private EmployeeMapper employeeMapper;
+
 
     JdbcTemplate jdbcTemplate;
 
@@ -39,8 +41,26 @@ public class EmployeeMapperTest {
         // given
         jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan', 21);");
         // when
-        List<Employee> employeeList = employeeMapper.selectAll();
+        List<Employee> employees = employeeMapper.selectAll();
         // then
-        assertEquals(1, employeeList.size());
+        assertEquals(1, employees.size());
+        assertEquals(1, employees.get(0).getId());
+        assertEquals("zhangsan", employees.get(0).getName());
+        assertEquals(21, employees.get(0).getAge());
+
+    }
+    @Test
+    public void should_fatch_part_employees_when_findAllEmloyeesByPages_given_page_and_size(){
+    	//given
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan', 21);");
+        int page = 1;
+        int pageSize = 1;
+        int skipCounts = page * (pageSize-1);
+    	//when
+        List<Employee> employees = employeeMapper.selectALLByPages(skipCounts,pageSize);
+    	//then
+        assertEquals(1, employees.get(0).getId());
+        assertEquals("zhangsan", employees.get(0).getName());
+        assertEquals(21, employees.get(0).getAge());
     }
 }
