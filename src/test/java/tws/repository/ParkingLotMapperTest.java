@@ -99,6 +99,18 @@ public class ParkingLotMapperTest {
         assertEquals(1, parkingLots.get(0).getId());
 
     }
+    @Test
+    public void should_delete_parkingLot_when_delete_given_id(){
+    	//given
+        jdbcTemplate.execute("INSERT INTO parkingLot VALUES(1,200,100,1);");
+    	int id =1;
+    	//when
+    	parkingLotMapper.delete(1);
+    	List<ParkingLot> parkingLots = parkingLotMapper.selectAll();
+
+    	//then
+    	assertEquals(0, parkingLots.size());
+    }
 
 
 }
