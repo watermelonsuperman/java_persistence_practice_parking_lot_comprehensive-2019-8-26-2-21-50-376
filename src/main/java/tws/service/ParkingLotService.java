@@ -15,16 +15,20 @@ public class ParkingLotService {
 	@Autowired
 	ParkingLotMapper parkingLotMapper;
 	
-	List<ParkingLot> selectAll(){
+	public List<ParkingLot> selectAll(){
 		return parkingLotMapper.selectAll();
 	}
-	void insert(ParkingLot parkingLot){
+	public void insert(ParkingLot parkingLot){
 		parkingLotMapper.insert(parkingLot);
 	}
-	List<ParkingLot> selectALLByPages(int pageSize,int pageCount){
+	public List<ParkingLot> selectALLByPages(int pageSize,int pageCount){
 		int skipCounts =  pageSize * (pageCount-1);
 		List<ParkingLot> parkingLots = parkingLotMapper.selectALLByPages(skipCounts,pageSize);
 		return parkingLots;
+	}
+	public void update(int id, ParkingLot parkingLot) {
+		parkingLotMapper.update(id,parkingLot);
+		
 	}
 	
 }

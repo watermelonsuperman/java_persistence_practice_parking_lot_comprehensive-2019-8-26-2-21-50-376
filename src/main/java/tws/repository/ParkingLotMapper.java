@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import tws.entity.Employee;
 import tws.entity.ParkingLot;
@@ -21,6 +22,9 @@ public interface ParkingLotMapper {
 	
 	@Select("select * from parkingLot OFFSET #{skipCounts} ROWS FETCH NEXT #{pageSize} ROWS ONLY")
 	List<ParkingLot> selectALLByPages(@Param("skipCounts") int skipCounts,@Param("pageSize") int pageSize);
+
+	@Update("update parkingLot set parkingLotId = #{parkingLot.parkingLotId},capacity = #{parkingLot.capacity},availablePositionCount = #{parkingLot.availablePositionCount},id=#{parkingLot.id} where parkingLotId = #{id}")
+	void update(@Param("id")int id, @Param("parkingLot")ParkingLot parkingLot);
 
 	
 }
