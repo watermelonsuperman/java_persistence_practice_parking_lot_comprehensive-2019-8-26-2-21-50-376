@@ -79,6 +79,26 @@ public class ParkingLotMapperTest {
         assertEquals(100,parkingLots.get(0).getAvailablePositionCount());
         assertEquals(1,parkingLots.get(0).getId());
     }
+    @Test
+    public void should_update_parkingLot_when_update_given_parkingLot_and_id(){
+    	//given
+        jdbcTemplate.execute("INSERT INTO parkingLot VALUES(1,200,100,1);");
+
+    	ParkingLot parkingLot = new ParkingLot(1,120,100,1);
+    	int id =1;
+    	
+    	//when
+    	parkingLotMapper.update(1,parkingLot);
+    	List<ParkingLot> parkingLots = parkingLotMapper.selectAll();
+
+    	//then
+    	assertEquals(1, parkingLots.size());
+    	assertEquals(1, parkingLots.get(0).getParkingLotId());
+        assertEquals(120, parkingLots.get(0).getCapacity());
+        assertEquals(100, parkingLots.get(0).getAvailablePositionCount());
+        assertEquals(1, parkingLots.get(0).getId());
+
+    }
 
 
 }
