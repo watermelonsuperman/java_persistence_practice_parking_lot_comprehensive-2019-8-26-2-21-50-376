@@ -103,6 +103,20 @@ public class EmployeeMapperTest {
         assertEquals(21, employees.get(0).getAge());
 
     }
-    
+    @Test
+    public void should_delete_employee_when_delete_given_id(){
+    	//given
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan', 21);");
+
+    	int id =1;
+    	
+    	//when
+    	employeeMapper.delete(1);
+    	List<Employee> employees = employeeMapper.selectAll();
+
+    	//then
+    	assertEquals(0, employees.size());
+   
+    }
     
 }
