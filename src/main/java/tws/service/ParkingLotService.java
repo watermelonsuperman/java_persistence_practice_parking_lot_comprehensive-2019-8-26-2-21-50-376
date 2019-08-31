@@ -30,5 +30,8 @@ public class ParkingLotService {
 		parkingLotMapper.update(id,parkingLot);
 		
 	}
+	public void delete(int id) {
+		parkingLotMapper.delete(id);
+	}
 	
 }

@@ -2,6 +2,7 @@ package tws.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,6 +26,9 @@ public interface ParkingLotMapper {
 
 	@Update("update parkingLot set parkingLotId = #{parkingLot.parkingLotId},capacity = #{parkingLot.capacity},availablePositionCount = #{parkingLot.availablePositionCount},id=#{parkingLot.id} where parkingLotId = #{id}")
 	void update(@Param("id")int id, @Param("parkingLot")ParkingLot parkingLot);
+
+	@Delete("delete from parkingLot where parkingLotId = #{id}")
+	void delete(@Param("id")int id);
 
 	
 }
