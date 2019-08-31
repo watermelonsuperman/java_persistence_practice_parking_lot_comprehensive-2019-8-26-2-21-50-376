@@ -46,6 +46,38 @@ public class ParkingLotMapperTest {
         List<ParkingLot> parkingLots = parkingLotMapper.selectAll();
         // then
         assertEquals(1, parkingLots.size());
+        assertEquals(1,parkingLots.get(0).getParkingLotId());
+        assertEquals(200,parkingLots.get(0).getCapacity());
+        assertEquals(100,parkingLots.get(0).getAvailablePositionCount());
+        assertEquals(1,parkingLots.get(0).getId());
+
+    }
+    
+    @Test
+    public void should_fatch_part_employees_when_findAllEmloyeesByPages_given_page_and_size(){
+    	// given
+        jdbcTemplate.execute("INSERT INTO parkingLot VALUES(1,200,100,1);");
+        int page = 1;
+        int pageSize = 1;
+        int skipCounts = page * (pageSize-1);
+        // when
+        List<ParkingLot> parkingLots = parkingLotMapper.selectALLByPages(skipCounts, pageSize);
+        // then
+        assertEquals(1, parkingLots.size());
+    }
+    @Test
+    public void should_return_correct_when_insert_given_parkingLot(){
+    	//given
+    	ParkingLot parkingLot = new ParkingLot(1,200,100,1);
+    	//when
+    	parkingLotMapper.insert(parkingLot);
+    	List<ParkingLot> parkingLots = parkingLotMapper.selectAll();
+    	//then
+        assertEquals(1, parkingLots.size());
+        assertEquals(1,parkingLots.get(0).getParkingLotId());
+        assertEquals(200,parkingLots.get(0).getCapacity());
+        assertEquals(100,parkingLots.get(0).getAvailablePositionCount());
+        assertEquals(1,parkingLots.get(0).getId());
     }
 
 

@@ -22,6 +22,7 @@ public class EmployeeService {
 	}
 
 	public List<Employee> findAllEmloyeesByPages(int pageSize,int pageCount){
+		
 		int skipCounts =  pageSize * (pageCount-1);
 		List<Employee> employees = employeeMapper.selectALLByPages(skipCounts,pageSize);
 		return employees;
@@ -31,5 +32,9 @@ public class EmployeeService {
 	
 	public void insert(Employee employee){
 		employeeMapper.insert(employee);
+	}
+
+	public void update(int id, Employee employee) {
+		employeeMapper.update(id,employee);
 	}
 }

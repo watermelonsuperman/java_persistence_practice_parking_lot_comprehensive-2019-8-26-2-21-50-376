@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
@@ -49,6 +50,8 @@ public class EmployeeMapperTest {
         assertEquals(21, employees.get(0).getAge());
 
     }
+    
+    
     @Test
     public void should_fatch_part_employees_when_findAllEmloyeesByPages_given_page_and_size(){
     	//given
@@ -63,4 +66,24 @@ public class EmployeeMapperTest {
         assertEquals("zhangsan", employees.get(0).getName());
         assertEquals(21, employees.get(0).getAge());
     }
+    
+    @Test
+    public void should_return_correct_when_insert_given_employee(){
+    	//given
+    	Employee employee = new Employee(1,"wyx",21);
+    	
+    	//when
+    	employeeMapper.insert(employee);
+    	List<Employee> employees = employeeMapper.selectAll();
+
+    	//then
+    	assertEquals(1, employees.size());
+        assertEquals(1, employees.get(0).getId());
+        assertEquals("wyx", employees.get(0).getName());
+        assertEquals(21, employees.get(0).getAge());
+
+    	
+    }
+    
+    
 }

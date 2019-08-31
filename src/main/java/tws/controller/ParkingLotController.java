@@ -26,12 +26,12 @@ public class ParkingLotController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
+	
 	ResponseEntity<List<ParkingLot>> selectAll(){
 		return ResponseEntity.ok(parkingLotMapper.selectAll());
 	}
 
 	@PostMapping("")
-	@ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<ParkingLot> insert(@RequestBody ParkingLot parkingLot) {
 		parkingLotMapper.insert(parkingLot);
         return ResponseEntity.created(URI.create("/parkingLot/" + parkingLot.getParkingLotId())).body(parkingLot);

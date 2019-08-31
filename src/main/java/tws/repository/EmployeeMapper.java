@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import tws.entity.Employee;
 
@@ -19,4 +20,7 @@ public interface EmployeeMapper {
 	
 	@Insert("insert into employee values(#{employee.id},#{employee.name},#{employee.age})")
     void insert(@Param("employee") Employee employee);
+	
+	@Update("update employee set id = #{employee.id},name = #{employee.name},age = #{employee.age} where id = #{id}")
+	void update(@Param("id")int id,@Param("employee")Employee employee);
 }
