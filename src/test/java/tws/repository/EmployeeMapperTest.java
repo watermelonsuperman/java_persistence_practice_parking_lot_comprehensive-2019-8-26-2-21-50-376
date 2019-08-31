@@ -84,6 +84,25 @@ public class EmployeeMapperTest {
 
     	
     }
+    @Test
+    public void should_update_employee_when_update_given_employee_and_id(){
+    	//given
+        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan', 21);");
+
+    	Employee employee = new Employee(1,"wyx",21);
+    	int id =1;
+    	
+    	//when
+    	employeeMapper.update(1,employee);
+    	List<Employee> employees = employeeMapper.selectAll();
+
+    	//then
+    	assertEquals(1, employees.size());
+        assertEquals(1, employees.get(0).getId());
+        assertEquals("wyx", employees.get(0).getName());
+        assertEquals(21, employees.get(0).getAge());
+
+    }
     
     
 }

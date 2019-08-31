@@ -1,5 +1,6 @@
 package tws.repository;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,4 +24,7 @@ public interface EmployeeMapper {
 	
 	@Update("update employee set id = #{employee.id},name = #{employee.name},age = #{employee.age} where id = #{id}")
 	void update(@Param("id")int id,@Param("employee")Employee employee);
+
+	@Delete("delete from employee where id = #{id}")
+	void delete(int id);
 }

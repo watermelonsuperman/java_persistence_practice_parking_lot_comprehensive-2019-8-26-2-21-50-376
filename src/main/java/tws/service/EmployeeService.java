@@ -37,4 +37,9 @@ public class EmployeeService {
 	public void update(int id, Employee employee) {
 		employeeMapper.update(id,employee);
 	}
+
+	public void delete(int id) {
+		employeeMapper.delete(id);
+		
+	}
 }
